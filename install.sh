@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env zsh
 sudo apt-get --assume-yes install npm
 
 # Copy files out to where they are supposed to be
@@ -7,9 +7,12 @@ cp init.vim ~/.config/nvim
 
 
 # Download neovim
+cd ~/.local
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod +x nvim.appimage
-mv nvim.appimage ~/.local/nvim.appimage
+./nvim.appimage --appimage-extract
+ln -s squashfs-root/usr/bin/nvim nvim
+cd -
 
 # Set up files
 touch ~/.bash_profile
@@ -22,7 +25,7 @@ cp ~/.zshrc ~/.zshrc.bak
 echo 'source ~/.bash_profile' >> ~/.zshrc
 
 # Add neovim
-echo 'alias nvim=~/.local/nvim.appimage' >> ~/.bash_profile
+echo 'alias nvim=~/.local/nvim' >> ~/.bash_profile
 echo 'alias vim=nvim' >> ~/.bash_profile
 
 # Install plugins
@@ -31,4 +34,3 @@ echo 'alias vim=nvim' >> ~/.bash_profile
 
 # Source to get neovim alias
 source ~/.zshrc
-
