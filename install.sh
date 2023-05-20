@@ -29,8 +29,8 @@ echo 'alias nvim=~/.local/nvim' >> ~/.bash_profile
 echo 'alias vim=nvim' >> ~/.bash_profile
 
 # Install plugins
-~/.local/nvim.appimage --headless +qall
-~/.local/nvim.appimage --headless +PlugInstall +qall
+~/.local/nvim --headless +qall
+~/.local/nvim --headless +PlugInstall +qall
 
 # Source to get neovim alias
 source ~/.zshrc
