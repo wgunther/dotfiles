@@ -204,6 +204,8 @@ Plug 'tjdevries/colorbuddy.nvim'
 "Plug 'svrana/neosolarized.nvim'
 "Plug 'phha/zenburn.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'jay-babu/mason-null-ls.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
@@ -220,7 +222,8 @@ lua <<END
   if (not status) then return end
 
   lspconfig.setup {
-    ensure_installed = { "tsserver", "tailwindcss", "clangd", "emmet_ls", "kotlin_language_server" },
+    ensure_installed = { "tsserver", "tailwindcss", "clangd", "emmet_ls",
+                         "kotlin_language_server", "pylsp", },
   }
 
   -- TypeScript
@@ -245,6 +248,16 @@ lua <<END
         'html', 'typescriptreact', 'javascriptreact', 'javascript',
         'typescript', 'javascript.jsx', 'typescript.tsx', 'css'
     },
+  }
+
+  -- Python
+  nvim_lsp.pylsp.setup {
+    filetypes = { "python" }
+  }
+
+  --Java
+  nvim_lsp.java_language_server.setup {
+    filetypes = { "java" }
   }
 
   -- clangd
@@ -322,6 +335,12 @@ require("formatter").setup {
     kotlin = {
       require("formatter.filetypes.kotlin").ktlink
     },
+    python = {
+      require("formatter.filetypes.python").black
+    },
+    java = {
+      require("formatter.filetypes.java").google_java_formatter
+    },
 
     -- Use the special "*" filetype for defining formatter configurations on
     -- any filetype
@@ -332,6 +351,12 @@ require("formatter").setup {
     }
   }
 }
+END
+
+lua <<END
+  require("mason-null-ls").setup({
+      ensure_installed = { "pettier", "black", "clangformat", "ktlink" }
+  })
 END
 
 " Setup for Lua Line "

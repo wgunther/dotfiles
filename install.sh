@@ -5,8 +5,8 @@ sudo apt-get --assume-yes install npm
 mkdir -p ~/.config/nvim
 cp init.vim ~/.config/nvim
 
-
 # Download neovim
+mkdir -p ~/.local
 cd ~/.local
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod +x nvim.appimage
