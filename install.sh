@@ -19,6 +19,8 @@ touch ~/.bash_profile
 touch ~/.zshrc
 cp ~/.bash_profile ~/.bash_profile.bak
 cp ~/.zshrc ~/.zshrc.bak
+# move editorconfig file to workspace root.
+cp .editorconfig /workspaces/
 
 # For consistency, I want to add to .bashrc and .zshrc, so
 # Just add to .bash_profile and source it from .zshrc

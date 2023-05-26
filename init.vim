@@ -58,6 +58,8 @@ set textwidth=79
 " Add a colored column at 80.
 set colorcolumn=+1
 
+let g:editorconfig = v:true
+
 " Turn on loading the plug-in files for specific file types.
 filetype plugin on
 
@@ -182,6 +184,9 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
+Plug 'jeetsukumaran/vim-pythonsense'
+Plug 'kana/vim-textobj-indent'
+
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
@@ -190,6 +195,9 @@ Plug 'hrsh7th/vim-vsnip'
 
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+
+Plug 'jeetsukumaran/vim-pythonsense'
+Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'nvim-lualine/lualine.nvim'
 " Plug 'nvim-tree/nvim-web-devicons'
@@ -336,7 +344,16 @@ require("formatter").setup {
       require("formatter.filetypes.kotlin").ktlink
     },
     python = {
-      require("formatter.filetypes.python").black
+      -- require("formatter.filetypes.python").black,
+
+      -- You can also define your own configuration
+      function()
+        return {
+          exe = "black",
+          args = { "-q", "--line-length=100", "-" },
+          stdin = true,
+        }
+      end
     },
     java = {
       require("formatter.filetypes.java").google_java_formatter
