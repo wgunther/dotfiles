@@ -185,7 +185,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
 Plug 'jeetsukumaran/vim-pythonsense'
-Plug 'kana/vim-textobj-indent'
+Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
