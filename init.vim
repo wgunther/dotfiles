@@ -260,7 +260,17 @@ lua <<END
 
   -- Python
   nvim_lsp.pylsp.setup {
-    filetypes = { "python" }
+    filetypes = { "python" },
+    settings = {
+      pylsp = {
+        plugins = {
+          pycodestyle = {
+            ignore = {'W391'},
+            maxLineLength = 100
+          }
+        }
+      }
+    }
   }
 
   --Java
