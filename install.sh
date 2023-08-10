@@ -36,3 +36,6 @@ echo 'alias vim=nvim' >> ~/.bash_profile
 
 # Source to get neovim alias
 source ~/.zshrc
+
+# Git Aliases
+git config --global alias.undo 'reset --soft HEAD^'
