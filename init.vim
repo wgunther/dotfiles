@@ -340,6 +340,7 @@ require("formatter").setup {
             "--indent-columns=2",
             "--maximum-line-length=80",
             "--cuddled-else",
+            "--novalign",
           },
           stdin = true,
         }
