@@ -4,6 +4,7 @@ sudo apt-get --assume-yes install npm
 # Copy files out to where they are supposed to be
 mkdir -p ~/.config/nvim
 cp init.vim ~/.config/nvim
+cp tmux.conf ~/.tmux.config
 
 # Download neovim
 mkdir -p ~/.local
