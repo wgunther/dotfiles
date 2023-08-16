@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 sudo apt-get --assume-yes install npm
+yes | sudo cpan Perl::Tidy
 
 # Copy files out to where they are supposed to be
 mkdir -p ~/.config/nvim

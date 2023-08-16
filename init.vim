@@ -326,6 +326,24 @@ require("formatter").setup {
         }
       end
     },
+    perl = {
+      function()
+        return {
+          exe = "perltidy",
+          args = {
+            "--quiet",
+            "--paren-tightness=2",
+            "--square-bracket-tightness=2",
+            "--brace-tightness=2",
+            "--block-brace-tightness=0",
+            "--extended-block-tightness",
+            "--indent-columns=2",
+            "--maximum-line-length=80",
+          },
+          stdin = true,
+        }
+      end
+    },
     html = {
       require("formatter.filetypes.html").prettier
     },
