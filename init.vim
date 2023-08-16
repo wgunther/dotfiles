@@ -339,6 +339,7 @@ require("formatter").setup {
             "--extended-block-tightness",
             "--indent-columns=2",
             "--maximum-line-length=80",
+            "--cuddled-else",
           },
           stdin = true,
         }
