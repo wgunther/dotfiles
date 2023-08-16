@@ -5,7 +5,7 @@ yes | sudo cpan Perl::Tidy
 # Copy files out to where they are supposed to be
 mkdir -p ~/.config/nvim
 ln -s $PWD/init.vim ~/.config/nvim/init.vim
-ln -s $PWD/tmux.conf ~/.tmux.config
+ln -s $PWD/tmux.conf ~/.tmux.conf
 ln -s $PWD/gs ~/.local/gs
 
 # Download neovim
