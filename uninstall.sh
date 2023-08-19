@@ -3,11 +3,16 @@
 rm ~/.config/nvim/init.vim
 rm ~/.local/nvim.appimage
 rm ~/.local/nvim
-rm ~/.zshrc
-rm ~/.bash_profile
+rm ~/.tmux.conf
+rm ~/.local/gs
+
 rm -R -f ~/.local/share/nvim
 rm -R -f ~/.local/squashfs-root
-mv ~/.bash_profile.bak ~/.bash_profile
+
+rm ~/.zshrc
+rm ~/.bashrc
+mv ~/.bashrc.bak ~/.bashrc
 mv ~/.zshrc.bak ~/.zshrc
 
 sudo apt-get --assume-yes remove npm
+git config --global --unset alias.undo

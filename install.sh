@@ -18,28 +18,27 @@ ln -s squashfs-root/usr/bin/nvim nvim
 cd -
 
 # Set up files
-touch ~/.bash_profile
+touch ~/.bashrc
 touch ~/.zshrc
-cp ~/.bash_profile ~/.bash_profile.bak
+# Backup
 cp ~/.zshrc ~/.zshrc.bak
+cp ~/.bashrc ~/.bashrc.bak
+# Add alias file
+VAR="source $PWD/aliases.sh"
+echo $VAR
+echo $VAR >> ~/.zshrc
+echo $VAR >> ~/.bashrc
+
 # move editorconfig file to workspace root.
 ln -s $PWD/.editorconfig /workspaces/.editorconfig
 
-# For consistency, I want to add to .bashrc and .zshrc, so
-# Just add to .bash_profile and source it from .zshrc
-echo 'source ~/.bash_profile' >> ~/.zshrc
-
-# Add neovim
-echo 'alias nvim=~/.local/nvim' >> ~/.bash_profile
-echo 'alias gs=~/.local/gs' >> ~/.bash_profile
-echo 'alias vim=nvim' >> ~/.bash_profile
+# Source to get neovim alias
+source ~/.zshrc
+source ~/.bashrc
 
 # Install plugins
 ~/.local/nvim --headless +qall
 ~/.local/nvim --headless +PlugInstall +qall
-
-# Source to get neovim alias
-source ~/.zshrc
 
 # Git Aliases
 git config --global alias.undo 'reset --soft HEAD^'
