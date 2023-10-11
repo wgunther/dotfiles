@@ -42,3 +42,6 @@ source ~/.bashrc
 
 # Git Aliases
 git config --global alias.undo 'reset --soft HEAD^'
+# Do --update-refs by default on rebases.
+git config --global --add --bool rebase.updateRefs true
+
