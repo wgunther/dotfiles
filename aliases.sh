@@ -3,6 +3,7 @@ alias gs=~/.local/gs
 alias vim=nvim
 alias gcplogin="gcloud auth application-default login"
 alias xl='git --no-pager log --oneline --graph --decorate `git branch | tr -d " *" | awk "{ print \\"master~1..\\"\\$0 }"`'
+alias xl=~/.local/xl
 
 alias pull_dotfiles="(cd /workspaces/.codespaces/.persistedshare/dotfiles; git pull)"
 

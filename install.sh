@@ -7,6 +7,7 @@ mkdir -p ~/.config/nvim
 ln -s $PWD/init.vim ~/.config/nvim/init.vim
 ln -s $PWD/tmux.conf ~/.tmux.conf
 ln -s $PWD/gs ~/.local/gs
+ln -s $PWD/xl ~/.local/xl
 
 # Download neovim
 mkdir -p ~/.local
