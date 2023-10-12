@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+use List::Util qw(uniq);
+
+my @branches = split ' ', `git branch | tr -d " *"`;
+my @bases;
+foreach my $branch (@branches) {
+  my $base = `git merge-base master $branch`;
+  chomp $base;
+  push @bases, $base;
+}
+
+@bases = uniq @bases;
+my @branches;
+my $i = 0;
+foreach my $commit (@bases) {
+  ++$i;
+  my $branch_name = "temp-HEAD-$i";
+  system("git branch $branch_name $commit");
+  push @branches, $branch_name;
+}
+
+my $str = join ' ', @branches;
+
+system("git --no-pager log  --all --oneline --graph --decorate $str --simplify-by-decoration --decorate-refs=refs/heads/*");
+
+for my $branch (@branches) {
+  system("git branch -q -D $branch");
+}
