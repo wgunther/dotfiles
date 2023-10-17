@@ -388,6 +388,15 @@ require("formatter").setup {
         }
       end
     },
+    sql = {
+      function()
+        return {
+            exe = "sql-formatter",
+            args = {vim.api.nvim_buf_get_name(0)},
+            stdin = true
+        }
+      end
+    },
     java = {
       require("formatter.filetypes.java").google_java_formatter
     },
@@ -405,7 +414,7 @@ END
 
 lua <<END
   require("mason-null-ls").setup({
-      ensure_installed = { "pettier", "black", "clangformat", "ktlink" }
+      ensure_installed = { "pettier", "black", "clangformat", "ktlink", "sql-formatter" }
   })
 END
 
