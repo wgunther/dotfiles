@@ -392,7 +392,7 @@ require("formatter").setup {
       function()
         return {
             exe = "sql-formatter",
-            args = {vim.api.nvim_buf_get_name(0)},
+            args = {vim.api.nvim_buf_get_name(0), "-l", "bigquery"},
             stdin = true
         }
       end

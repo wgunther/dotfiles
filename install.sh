@@ -6,11 +6,11 @@ yes | sudo cpan Perl::Tidy
 mkdir -p ~/.config/nvim
 ln -s $PWD/init.vim ~/.config/nvim/init.vim
 ln -s $PWD/tmux.conf ~/.tmux.conf
+mkdir -p ~/.local
 ln -s $PWD/gs ~/.local/gs
 ln -s $PWD/xl ~/.local/xl
 
 # Download neovim
-mkdir -p ~/.local
 cd ~/.local
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod +x nvim.appimage
