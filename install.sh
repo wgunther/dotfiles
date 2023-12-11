@@ -30,8 +30,6 @@ echo $VAR
 echo $VAR >> ~/.zshrc
 echo $VAR >> ~/.bashrc
 
-echo "gh config set editor ~/.local/nvim" >> ~/.zshrc
-
 # move editorconfig file to workspace root.
 ln -s $PWD/.editorconfig /workspaces/.editorconfig
 

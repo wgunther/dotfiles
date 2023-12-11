@@ -13,3 +13,5 @@ git config --global alias.undo 'reset --soft HEAD^'
 git config --global --add --bool rebase.updateRefs true
 
 git config --global alias.amend 'commit --amend  --no-edit'
+
+gh config set editor ~/.local/nvim
