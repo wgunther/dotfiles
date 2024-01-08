@@ -6,6 +6,9 @@ alias xl='git --no-pager log --oneline --graph --decorate `git branch | tr -d " 
 alias xl=~/.local/xl
 
 alias pull_dotfiles="(cd /workspaces/.codespaces/.persistedshare/dotfiles; git pull)"
+alias cdb="cd /workspaces/$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)"
+
+
 
 # Git Aliases
 git config --global alias.undo 'reset --soft HEAD^'
