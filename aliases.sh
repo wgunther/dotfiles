@@ -17,4 +17,6 @@ git config --global --add --bool rebase.updateRefs true
 
 git config --global alias.amend 'commit --amend  --no-edit'
 
+# nvim as default editor
+git config --global core.editor ~/.local/nvim
 gh config set editor ~/.local/nvim
