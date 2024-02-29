@@ -80,6 +80,9 @@ augroup END
 "colors gruvbox
 set tgc
 
+command! -bang -nargs=* PRg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
+
 " Highlight extra whitespace. Note: must be after `colors`.
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -166,6 +169,10 @@ unmap #
 
 map <Leader>=b :Format<CR>
 map <Leader>gd :lua vim.lsp.buf.definition()<CR>
+
+" FZF
+map <Leader>/ :PRg<CR>
+map <Leader>F :GFiles<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
