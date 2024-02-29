@@ -172,7 +172,7 @@ map <Leader>gd :lua vim.lsp.buf.definition()<CR>
 
 " FZF
 map <Leader>/ :PRg<CR>
-map <Leader>F :GFiles<CR>
+map <Leader>f :GFiles<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
