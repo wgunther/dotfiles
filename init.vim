@@ -216,6 +216,12 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jay-babu/mason-null-ls.nvim'
 
 Plug 'github/copilot.vim'
+
+" fzf native plugin
+Plug 'junegunn/fzf'
+" fzf.vim
+Plug 'junegunn/fzf.vim'
+
 let g:copilot_assume_mapped = v:true
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
