@@ -33,6 +33,12 @@ echo $VAR >> ~/.bashrc
 # move editorconfig file to workspace root.
 ln -s $PWD/.editorconfig /workspaces/.editorconfig
 
+# if pip is installed, then install neovim-remote
+if command -v pip3 &> /dev/null
+then
+    pip3 install neovim-remote
+fi
+
 # Source to get neovim alias
 source ~/.zshrc
 source ~/.bashrc

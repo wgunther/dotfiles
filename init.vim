@@ -93,6 +93,27 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 " Keeps signcolumn open, less jarring.
 set signcolumn=yes
 
+function! OpenOrReuseTerminal()
+    " Check for an existing terminal buffer
+    let existing_terminal = -1
+    for bufnr in range(1, bufnr('$'))
+        if getbufvar(bufnr, '&buftype') ==# 'terminal'
+            let existing_terminal = bufnr
+            break
+        endif
+    endfor
+
+    " If a terminal buffer exists, open it in a new split on the far left
+    if existing_terminal != -1
+        execute 'topleft vert sb' . existing_terminal
+    else
+        " No terminal buffer found, create a new terminal in a split on the far left
+        execute 'topleft vert new'
+        startinsert
+        execute 'terminal'
+    endif
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maps
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -154,7 +175,8 @@ map <Leader>gv `[v`]
 " Open terminal.
 autocmd TermOpen * setlocal nospell
 autocmd TermOpen * setlocal nonu
-map <Leader>T :new<CR>:terminal<CR><C-W>H
+" map <Leader>T :new<CR>:terminal<CR><C-W>H
+nnoremap <silent> <Leader>T :call OpenOrReuseTerminal()<CR>
 " TODO this was to reopen a hidden terminal, but it doesn't seem great.
 " map <Leader>t <C-W>v<C-W>:buf bash<CR>i
 tnoremap <C-W>N <C-\><C-N>
