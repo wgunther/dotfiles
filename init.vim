@@ -586,3 +586,32 @@ set foldmethod=indent
 set foldnestmax=1
 
 lua require'nvim-treesitter.configs'.setup{highlight={enable=true}}
+
+lua << EOF
+vim.api.nvim_set_hl(0, "Chicken", {
+  bg = "#000000",
+  fg = "fg",
+})
+vim.api.nvim_create_augroup("_terminal", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+  command = "setlocal winhighlight=Normal:Chicken",
+  group = "_terminal",
+})
+EOF
+
+let g:terminal_color_0 = '#303030'
+let g:terminal_color_1 = '#d7875f'
+let g:terminal_color_2 = '#87af87'
+let g:terminal_color_3 = '#d7d787'
+let g:terminal_color_4 = '#87afd7'
+let g:terminal_color_5 = '#d7af5f'
+let g:terminal_color_6 = '#87d7d7'
+let g:terminal_color_7 = '#808080'
+let g:terminal_color_8 = '#4e4e4e'
+let g:terminal_color_9 = '#d75f5f'
+let g:terminal_color_10 = '#87af5f'
+let g:terminal_color_11 = '#afaf5f'
+let g:terminal_color_12 = '#5f8787'
+let g:terminal_color_13 = '#af875f'
+let g:terminal_color_14 = '#87afaf'
+let g:terminal_color_15 = '#e4e4e4'

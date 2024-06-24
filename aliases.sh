@@ -20,3 +20,10 @@ git config --global alias.amend 'commit --amend  --no-edit'
 # nvim as default editor
 git config --global core.editor ~/.local/nvim
 gh config set editor ~/.local/nvim
+
+export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;31:bd=30;46:cd=30;46:su=30'
+export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
+export LSCOLORS=CxahafafBxagagabababab
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+autoload -Uz compinit
+compinit
