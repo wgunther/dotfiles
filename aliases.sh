@@ -8,7 +8,7 @@ alias xl=~/.local/xl
 alias pull_dotfiles="(cd /workspaces/.codespaces/.persistedshare/dotfiles; git pull)"
 alias cdb="cd /workspaces/$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)"
 
-alias clean_git=git fetch -p; git branch -vv | awk '/: gone]/{print $1}' | xargs -p git branch -D
+alias clean_git="git fetch -p; git branch -vv | awk '/: gone]/{print \$1}' | xargs -p git branch -D"
 
 
 
