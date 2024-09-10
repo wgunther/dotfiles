@@ -268,14 +268,13 @@ lua <<END
   if (not status) then return end
 
   lspconfig.setup {
-    ensure_installed = { "tsserver", "tailwindcss", "clangd", "emmet_ls",
+    ensure_installed = { "ts_ls", "tailwindcss", "clangd", "emmet_ls",
                          "kotlin_language_server", "pylsp", },
   }
 
   -- TypeScript
-  nvim_lsp.tsserver.setup {
+  nvim_lsp.ts_ls.setup {
     filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact" },
-    cmd = { "typescript-language-server", "--stdio" }
   }
 
   -- Tailwind
