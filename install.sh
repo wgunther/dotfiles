@@ -36,6 +36,11 @@ echo $VAR
 echo $VAR >> ~/.zshrc
 echo $VAR >> ~/.bashrc
 
+# Install node 18 -- important for Copilot plugin
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+source ~/.zshrc
+nvm install 18
+
 # move editorconfig file to workspace root.
 ln -s $PWD/.editorconfig /workspaces/.editorconfig
 
