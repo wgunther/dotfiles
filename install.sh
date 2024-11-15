@@ -19,7 +19,7 @@ chmod +x nvim.appimage
 ./nvim.appimage --appimage-extract
 ln -s squashfs-root/usr/bin/nvim nvim
 
-wget https://github.com/martinvonz/jj/releases/download/v0.19.0/jj-v0.19.0-x86_64-unknown-linux-musl.tar.gz
+wget https://github.com/martinvonz/jj/releases/download/v0.23.0/jj-v0.23.0-x86_64-unknown-linux-musl.tar.gz
 tar -zxvf jj-v0.19.0-x86_64-unknown-linux-musl.tar.gz ./jj
 mkdir -p ~/.local/bin
 mv jj ~/.local/bin
