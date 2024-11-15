@@ -29,7 +29,7 @@ gh config set editor ~/.local/nvim
 if command -v jj &> /dev/null; then
   jj config set --user user.name "$(git config user.name)"
   jj config set --user user.email "$(git config user.email)"
-  jj config set --user git.push-bookmark-prefix "wgunther-"
+  jj config set --user git.push-bookmark-prefix "$GITHUB_USER"
 fi
 
 export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;31:bd=30;46:cd=30;46:su=30'
