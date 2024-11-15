@@ -27,8 +27,8 @@ gh config set editor ~/.local/nvim
 
 # jj aliases
 if command -v jj &> /dev/null; then
-  jj config set --user user.name $(git config user.name)
-  jj config set --user user.email $(git config user.email)
+  jj config set --user user.name "$(git config user.name)"
+  jj config set --user user.email "$(git config user.email)"
   jj config set --user git.push-bookmark-prefix "wgunther-"
 fi
 
