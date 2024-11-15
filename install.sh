@@ -12,16 +12,19 @@ mkdir -p ~/.local
 ln -s $PWD/gs ~/.local/gs
 ln -s $PWD/xl ~/.local/xl
 
+mkdir -p ~/.local/bin
+
 # Download neovim
 cd ~/.local
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod +x nvim.appimage
 ./nvim.appimage --appimage-extract
 ln -s squashfs-root/usr/bin/nvim nvim
+ln -s ~/.local/nvim ~/.local/bin/nvim
 
+# Install jj
 wget https://github.com/martinvonz/jj/releases/download/v0.23.0/jj-v0.23.0-x86_64-unknown-linux-musl.tar.gz
 tar -zxvf jj-v0.23.0-x86_64-unknown-linux-musl.tar.gz ./jj
-mkdir -p ~/.local/bin
 mv jj ~/.local/bin
 rm jj-*
 cd -
@@ -72,3 +75,5 @@ jj git init --colocate
 jj branch track $(git branch --format="%(upstream:lstrip=-1)@${GIT_REMOTE}")
 popd
 
+# Set up git environment
+git config --global credential.helper /.codespaces/bin/gitcredential_github.sh

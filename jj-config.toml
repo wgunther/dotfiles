@@ -1,0 +1,5 @@
+[ui]
+editor = "nvim"
+
+[aliases]
+xl = ["log", "--no-pager"]
