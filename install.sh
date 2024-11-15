@@ -26,16 +26,6 @@ mv jj ~/.local/bin
 rm jj-*
 cd -
 
-# Set up jj environment
-pushd "/workspaces/${RepositoryName}"
-GIT_REMOTE=$(git remote)
-export GIT_MAIN=$(git remote show "${GIT_REMOTE}" | sed -n '/HEAD branch/s/.*: //p')
-envsubst '$GIT_MAIN' < "${JJ_BASE_CONFIG}" >> ~/.config/jj/config.toml
-jj git init --colocate
-# This branch tracking happens to work, but makes naming assumptions about refs.
-jj branch track $(git branch --format="%(upstream:lstrip=-1)@${GIT_REMOTE}")
-popd
-
 # Set up files
 touch ~/.bashrc
 touch ~/.zshrc
@@ -48,6 +38,7 @@ VAR="source $PWD/aliases.sh"
 echo $VAR
 echo $VAR >> ~/.zshrc
 echo $VAR >> ~/.bashrc
+#
 
 # Install node 18 -- important for Copilot plugin
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
@@ -70,4 +61,14 @@ source ~/.bashrc
 # Install plugins
 ~/.local/nvim --headless +qall
 ~/.local/nvim --headless +PlugInstall +qall
+
+# Set up jj environment
+pushd "/workspaces/${RepositoryName}"
+GIT_REMOTE=$(git remote)
+export GIT_MAIN=$(git remote show "${GIT_REMOTE}" | sed -n '/HEAD branch/s/.*: //p')
+envsubst '$GIT_MAIN' < "${JJ_BASE_CONFIG}" >> ~/.config/jj/config.toml
+jj git init --colocate
+# This branch tracking happens to work, but makes naming assumptions about refs.
+jj branch track $(git branch --format="%(upstream:lstrip=-1)@${GIT_REMOTE}")
+popd
 
