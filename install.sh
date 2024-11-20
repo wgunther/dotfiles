@@ -70,7 +70,7 @@ pushd "/workspaces/${RepositoryName}"
 GIT_REMOTE=$(git remote)
 export GIT_MAIN=$(git remote show "${GIT_REMOTE}" | sed -n '/HEAD branch/s/.*: //p')
 export GIT_BRANCH=$(git branch --format="%(upstream:lstrip=-1)")
-envsubst '$GIT_MAIN' < "${JJ_BASE_CONFIG}" >> ~/.config/jj/config.toml
+git pull $GIT_REMOTE $GIT_MAIN
 git checkout $GIT_MAIN
 jj git init --colocate
 # This branch tracking happens to work, but makes naming assumptions about refs.
