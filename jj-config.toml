@@ -3,3 +3,6 @@ editor = "nvim"
 
 [aliases]
 xl = ["log", "--no-pager"]
+up = ["edit"]
+sync = ["rebase", "-b", "@", "-d", "trunk()"]
+pdiff = ["diff", "-r", "@-"]

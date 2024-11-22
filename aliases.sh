@@ -64,3 +64,13 @@ git_prompt_info () {
         fi
         echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref:gs/%/%%}${upstream:gs/%/%%}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
+
+if [[ $- == *i* ]]
+then
+        autoload -U up-line-or-beginning-search
+        autoload -U down-line-or-beginning-search
+        zle -N up-line-or-beginning-search
+        zle -N down-line-or-beginning-search
+        bindkey "^[[A" up-line-or-beginning-search # Up
+        bindkey "^[[B" down-line-or-beginning-search # Down
+fi

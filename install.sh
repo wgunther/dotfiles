@@ -21,6 +21,7 @@ chmod +x nvim.appimage
 ./nvim.appimage --appimage-extract
 ln -s squashfs-root/usr/bin/nvim nvim
 ln -s ~/.local/nvim ~/.local/bin/nvim
+ln -s ~/.local/nvim ~/.local/bin/vim
 
 # Install jj
 wget https://github.com/martinvonz/jj/releases/download/v0.23.0/jj-v0.23.0-x86_64-unknown-linux-musl.tar.gz
