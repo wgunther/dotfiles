@@ -6,3 +6,8 @@ xl = ["log", "--no-pager"]
 up = ["edit"]
 sync = ["rebase", "-b", "@", "-d", "trunk()"]
 pdiff = ["diff", "-r", "@-"]
+mdiff = ["diff", "--from", "master"]
+promote = ["bookmark", "move", "--from", "@-"]
+
+[revset-aliases]
+tip = 'heads(@::)'
