@@ -12,6 +12,11 @@ mkdir -p ~/.local
 ln -s $PWD/gs ~/.local/gs
 ln -s $PWD/xl ~/.local/xl
 
+# Use ecr-login for docker credentials
+mkdir -p ~/.docker
+echo '{ "credsStore": "ecr-login" }' > ~/.docker/config.json
+
+
 mkdir -p ~/.local/bin
 
 # Download neovim
