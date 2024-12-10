@@ -54,8 +54,13 @@ git_prompt_info () {
         local jj
         ref=$(__git_prompt_git symbolic-ref --short HEAD 2> /dev/null)  || ref=$(__git_prompt_git rev-parse --short HEAD 2> /dev/null)  || return 0
         if jj st &> /dev/null; then
-          jj=$(jj log --no-graph --no-pager  --color never -T 'parents.map(|c| c.change_id().shortest()).join(",") ++ "->" ++ change_id.shortest()'  -r @)
-          ref="$ref $jj"
+          bookmark=$(jj bookmark list -r @ --no-pager | perl -n -E '@a = split(":"); print $a[0] and exit if @a > 1')
+          if [[ -n $bookmark ]]; then
+            ref="$ref $bookmark"
+          else
+            jj=$(jj log --no-graph --no-pager  --color never -T 'parents.map(|c| coalesce(c.local_bookmarks(), c.remote_bookmarks(), c.change_id().shortest())).join(",") ++ "->" ++ change_id.shortest()'  -r @)
+            ref="$ref $jj"
+          fi
         fi
         local upstream
         if (( ${+ZSH_THEME_GIT_SHOW_UPSTREAM} ))
