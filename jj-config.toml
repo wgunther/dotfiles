@@ -11,3 +11,7 @@ promote = ["bookmark", "move", "--from", "@-"]
 
 [revset-aliases]
 tip = 'heads(@::)'
+
+[fix.tools.pre-commit]
+command = ["bash", "-c", "cat; pre-commit run --files $path  > /dev/null 2> /dev/null"]
+patterns = ["glob:'**/*'"]
