@@ -7,7 +7,7 @@ up = ["edit"]
 sync = ["rebase", "-b", "@", "-d", "trunk()"]
 pdiff = ["diff", "-r", "@-"]
 mdiff = ["diff", "--from", "master"]
-promote = ["bookmark", "move", "--from", "@-"]
+promote = ["bookmark", "move", "--from", "bookmarks() & ..@ & (~(..bookmarks()-))"]
 
 [revset-aliases]
 tip = 'heads(@::)'
