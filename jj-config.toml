@@ -8,6 +8,7 @@ sync = ["rebase", "-b", "@", "-d", "trunk()"]
 pdiff = ["diff", "-r", "@-"]
 mdiff = ["diff", "--from", "master"]
 promote = ["bookmark", "move", "--from", "bookmarks() & ..@ & (~(..bookmarks()-))"]
+abs = ["absorb"]
 
 [revset-aliases]
 tip = 'heads(@::)'
