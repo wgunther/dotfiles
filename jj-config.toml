@@ -5,10 +5,32 @@ editor = "nvim"
 xl = ["log", "--no-pager"]
 up = ["edit"]
 sync = ["rebase", "-b", "@", "-d", "trunk()"]
+mmaster = ["bookmark", "move", "--from", "master", "--to", "master@origin"]
 pdiff = ["diff", "-r", "@-"]
 mdiff = ["diff", "--from", "master"]
 promote = ["bookmark", "move", "--from", "bookmarks() & ..@ & (~(..bookmarks()-))"]
 abs = ["absorb"]
+precommit = ["util", "exec", "--", "bash", "-c", """
+#!/usr/bin/env bash
+if [[ -z $(jj diff) ]]; then
+    diff_files=$(jj log --no-graph -T 'diff.summary()' -r '@-' | awk '{print $2}' | xargs)
+else
+    diff_files=$(jj log --no-graph -T 'diff.summary()' -r '@' | awk '{print $2}' | xargs)
+    jj new
+fi
+if [ -z "$diff_files" ]; then
+  echo "No files to check with precommit"
+  exit
+fi
+pre-commit run --files $diff_files
+
+if [[ -z $(jj diff) ]]; then
+   jj abandon
+   echo "No changes from precommit!"
+   exit 0
+fi
+jj describe -m 'Apply results of pre-commit run'
+""", ""]
 
 [revset-aliases]
 tip = 'heads(@::)'
