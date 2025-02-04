@@ -581,7 +581,6 @@ lua << EOF
 EOF
 
 
-set foldmethod=indent
 set foldnestmax=1
 
 lua require'nvim-treesitter.configs'.setup{highlight={enable=true}}
