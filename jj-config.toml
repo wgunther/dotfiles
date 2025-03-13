@@ -5,6 +5,7 @@ editor = "nvim"
 xl = ["log", "--no-pager"]
 up = ["edit"]
 sync = ["rebase", "-b", "@", "-d", "trunk()"]
+integrate = ["squash", "-r", "@+"]
 mmaster = ["bookmark", "move", "--from", "master", "--to", "master@origin"]
 pdiff = ["diff", "-r", "@-"]
 mdiff = ["diff", "--from", "master"]

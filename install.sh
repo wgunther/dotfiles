@@ -21,8 +21,8 @@ mkdir -p ~/.local/bin
 
 # Download neovim
 cd ~/.local
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod +x nvim.appimage
+curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage
+chmod +x nvim-linux-x86_64.appimage
 ./nvim.appimage --appimage-extract
 ln -s squashfs-root/usr/bin/nvim nvim
 ln -s ~/.local/nvim ~/.local/bin/nvim
