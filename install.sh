@@ -23,7 +23,7 @@ mkdir -p ~/.local/bin
 cd ~/.local
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage
 chmod +x nvim-linux-x86_64.appimage
-./nvim.appimage --appimage-extract
+./nvim-linux-x86_64.appimage --appimage-extract
 ln -s squashfs-root/usr/bin/nvim nvim
 ln -s ~/.local/nvim ~/.local/bin/nvim
 ln -s ~/.local/nvim ~/.local/bin/vim
