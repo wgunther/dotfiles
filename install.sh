@@ -21,9 +21,12 @@ sudo mkdir -p ~/.local/bin
 
 # Download neovim
 cd ~/.local
-curl -LO https://github.com/neovim/neovim/releases/download/v0.10.3/nvim.appimage
-chmod +x nvim.appimage
-./nvim.appimage  --appimage-extract
+sudo chmod 777 -R .
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+sudo curl -LO https://github.com/neovim/neovim/releases/download/v0.10.3/nvim.appimage
+sudo chmod +x nvim.appimage
+sudo ./nvim.appimage  --appimage-extract
 sudo ln -s squashfs-root/usr/bin/nvim nvim
 sudo ln -s ~/.local/nvim ~/.local/bin/nvim
 sudo ln -s ~/.local/nvim ~/.local/bin/vim
