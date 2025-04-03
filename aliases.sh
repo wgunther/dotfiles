@@ -24,7 +24,7 @@ git config --global alias.amend 'commit --amend  --no-edit'
 
 # nvim as default editor
 git config --global core.editor ~/.local/nvim
-gh config set editor ~/.local/nvim
+sudo gh config set editor ~/.local/nvim
 
 # jj aliases
 if command -v jj &> /dev/null; then
@@ -79,3 +79,4 @@ then
         bindkey "^[[A" up-line-or-beginning-search # Up
         bindkey "^[[B" down-line-or-beginning-search # Down
 fi
+
