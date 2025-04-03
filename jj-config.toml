@@ -2,6 +2,7 @@
 editor = "nvim"
 
 [aliases]
+drop = ["abandon"]
 xl = ["log", "--no-pager"]
 up = ["edit"]
 sync = ["rebase", "-b", "@", "-d", "trunk()"]
@@ -11,6 +12,11 @@ pdiff = ["diff", "-r", "@-"]
 mdiff = ["diff", "--from", "master"]
 promote = ["bookmark", "move", "--from", "bookmarks() & ..@ & (~(..bookmarks()-))"]
 abs = ["absorb"]
+squash-back = ["util", "exec", "--", "bash", "-c", """
+#!/usr/bin/env bash
+jj edit @-
+jj squash
+""", ""]
 precommit = ["util", "exec", "--", "bash", "-c", """
 #!/usr/bin/env bash
 if [[ -z $(jj diff) ]]; then
@@ -30,11 +36,13 @@ if [[ -z $(jj diff) ]]; then
    echo "No changes from precommit!"
    exit 0
 fi
-jj describe -m 'Apply results of pre-commit run'
+jj describe -m 'Apply changes from precommit:'
 """, ""]
+apply_precommit = ["squash", "-r", "precommits & @+"]
 
 [revset-aliases]
 tip = 'heads(@::)'
+precommits = """mutable() & description(regex:"^Apply changes from precommit:.*?")"""
 
 [fix.tools.pre-commit]
 command = ["bash", "-c", "cat; pre-commit run --files $path  > /dev/null 2> /dev/null"]
