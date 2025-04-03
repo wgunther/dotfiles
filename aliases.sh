@@ -24,7 +24,7 @@ git config --global alias.amend 'commit --amend  --no-edit'
 
 # nvim as default editor
 git config --global core.editor ~/.local/nvim
-sudo gh config set editor ~/.local/nvim
+gh config set editor ~/.local/nvim
 
 # jj aliases
 if command -v jj &> /dev/null; then
@@ -42,7 +42,7 @@ compinit
 
 # For jj autocomplete
 if command -v jj &> /dev/null; then
-    source <(jj util completion zsh)
+  source <(COMPLETE=zsh jj)
 fi
 
 git_prompt_info () {

@@ -1,22 +1,99 @@
+[core]
+fsmonitor = "watchman"
+watchman.register-snapshot-trigger = true
+
 [ui]
 editor = "nvim"
 
 [aliases]
 drop = ["abandon"]
-xl = ["log", "--no-pager"]
+xl = ["util", "exec", "--", "bash", "-c", """
+#!/usr/bin/env bash
+
+feature_name="$1"
+# if there's a feature name, then we want to add a filter to the log.
+filter=""
+archive_filter=""
+if [ -n "$feature_name" ]; then
+  if [ "$feature_name" == "all" ]; then
+    archive_filter=""
+  else
+    archive_filter=" & ~trunk()..bookmarks('wgunther-feature-archive')"
+    filter="::bookmarks(glob:'wgunther-feature-$feature_name') & "
+  fi
+else
+  archive_filter=" & ~trunk()..bookmarks('wgunther-feature-archive')"
+  filter=""
+fi
+
+jj log -r "@ | ($filter ~bookmarks(glob:'wgunther-feature-*') & (present(@) | ancestors(immutable_heads().., 2) | present(trunk()))$archive_filter)" --no-pager
+""", ""]
+rmfeat = ["util", "exec", "--", "bash", "-c", """
+jj drop wgunther-feature-$1
+""", ""]
+unfeat = ["util", "exec", "--", "bash", "-c", """
+echo "Not implemented, but this will look at children of feature branch minus this revision and new over those, and abandon the feature branch, and then move the feature branch to the new thing we made"
+""", ""]
+feat = ["util", "exec", "--", "bash", "-c", """
+perl - "$1" <<'EOF'
+my $feature_name="$ARGV[0]";
+print "Creating feature branch $feature_name\n";
+
+my $bookmark_exists = `jj b l wgunther-feature-$feature_name | wc -l`;
+if ($bookmark_exists == 0) {
+  my $new_rev = new_over_revs("@");
+  print "Creating new feature branch wgunther-feature-$feature_name on $new_rev\n";
+  system("jj b c wgunther-feature-$feature_name -r $new_rev");
+} else {
+  my $diff = `jj diff -r wgunther-feature-$feature_name`;
+  if ($diff ne "") {
+    print "Feature branch wgunther-feature-$feature_name has changes, not creating a new branch\n";
+    exit 1;
+  }
+  # first new over the current branch and parents of feature branch
+  my $new_rev = new_over_revs("@ all:wgunther-feature-$feature_name-");
+  # next, abandon the feature branch
+  print "Abandoning feature branch wgunther-feature-$feature_name\n";
+  system("jj drop wgunther-feature-$feature_name");
+  # finally, create a new feature branch
+  print "Creating new feature branch wgunther-feature-$feature_name on $new_rev\n";
+  system("jj b c wgunther-feature-$feature_name -r $new_rev");
+}
+
+sub new_over_revs {
+  my $revs = shift;
+  my $new_rev = `jj new --no-edit $revs --no-pager  2>&1`;
+  print "new rev: $new_rev\n";
+  $new_rev =~ m/Created new commit (\\w+)/i;
+  return $1;
+}
+
+EOF
+""", ""]
 up = ["edit"]
-sync = ["rebase", "-b", "@", "-d", "trunk()"]
-syncall = ["rebase", "-b", "all:heads((immutable_heads():: & mutable()))", "-d", "trunk()"]
+sync = ["rebase", "-b", "@", "-d", "trunk()", "--skip-emptied"]
+syncall = ["rebase", "--skip-emptied", "-b", "all:heads((immutable_heads():: & mutable()))", "-d", "trunk()"]
 integrate = ["squash", "-r", "@+"]
 mmaster = ["bookmark", "move", "--from", "master", "--to", "master@origin"]
 pdiff = ["diff", "-r", "@-"]
 mdiff = ["diff", "--from", "master"]
+demote = ["bookmark", "move", "--from", "@", "--to", "@-", "--allow-backwards"]
+promote-last = ["bookmark", "move", "--from", "@-", "--to", "@"]
 promote = ["bookmark", "move", "--from", "bookmarks() & ..@ & (~(..bookmarks()-))"]
 abs = ["absorb"]
 squash-back = ["util", "exec", "--", "bash", "-c", """
 #!/usr/bin/env bash
 jj edit @-
 jj squash
+""", ""]
+changed = ["diff", "--name-only"]
+openpr = ["util", "exec", "--", "bash", "-c", """
+#!/usr/bin/env bash
+rev="$1"
+if [ -z "$rev" ]; then
+  rev="@"
+fi
+jj log --no-graph -T 'bookmarks.map(|b| b.name()).join(",")' -r "bookmarks() & $rev" | xargs gh pr view -w
 """, ""]
 precommit = ["util", "exec", "--", "bash", "-c", """
 #!/usr/bin/env bash
